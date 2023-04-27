@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>아주환경개발 - 공지사항</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<th:block th:replace="~{fragments/header :: headFragment}"></th:block>
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+            <h2>공지사항</h2>
+            <ol>
+                <li><a href="/index">Home</a></li>
+                <li>공지사항</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+
+            <table class="table text-center">
+                <colgroup>
+                    <col>
+                    <col width="50%">
+                </colgroup>
+                <thead class="table-dark">
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성일시</th>
+                    <th>글쓴이</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board, loop : ${paging}">
+                    <td th:text="${paging.pageable.pageNumber}==0 ? ${paging.totalElements}- ${loop.index} : ( ${paging.totalElements} - (${paging.pageable.pageNumber}*10) + ${loop.count})"></td>
+                    <td class="text-start">
+                        <a th:href="@{|/detail/${board.id}|}" th:text="${board.title}"></a>
+                    </td>
+                    <td th:text="${#temporals.format(board.create, 'yy-MM-dd HH:mm')}"></td>
+                    <td th:text="${board.writer}"></td>
+                    <td th:text="${board.hitCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <div class="blog-pagination">
+                <ul class="justify-content-center">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                </ul>
+            </div><!-- End blog pagination -->
+            <div th:if="${session.admin != null}" style="display: flex; justify-content: right;">
+                <button class="btn btn-warning">글쓰기</button>
+            </div>
+        </div>
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<th:block th:replace="~{fragments/footer :: footFragment}"></th:block>
+<!-- End Footer -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

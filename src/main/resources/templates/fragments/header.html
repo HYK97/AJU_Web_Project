@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headFragment">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+
+    <header id="header" class="header d-flex align-items-center">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+            <a href="/index" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1>아주환경개발(주)</h1>
+            </a>
+
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="/index">Home</a></li>
+                    <li class="dropdown"><a href="#"><span>회사소개</span> <i
+                            class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li><a href="/greetings">인사말</a></li>
+                            <li><a href="/history">연혁</a></li>
+                            <li><a href="/organization">조직도</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/services">사업분야</a></li>
+                    <li><a href="/projects">실적 및 사례</a></li>
+                    <li><a href="/announcement">공지사항</a></li>
+                    <li><a href="/contact">오시는길</a></li>
+                    <li th:if="${session.admin == null}"><a href="admin/login">로그인</a></li>
+                    <li th:if="${session.admin != null}"><a href="admin/logout">로그아웃</a></li>
+                </ul>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+
+    <script>
+        $(document).ready(function () {
+            let path = window.location.pathname;
+            $("nav.navbar ul li a").each(function () {
+                if (path === $(this).attr("href")) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+    </script>
+
+</th:block>
+</html>
