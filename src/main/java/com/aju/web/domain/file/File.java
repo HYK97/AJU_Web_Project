@@ -1,6 +1,6 @@
 package com.aju.web.domain.file;
 
-import com.aju.web.domain.announcement.Notice;
+import com.aju.web.domain.notice.Notice;
 import com.aju.web.domain.common.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 /*
  * packageName :  com.aju.web.domain.file
  * fileName : File

@@ -1,10 +1,9 @@
-package com.aju.web.domain.announcement;
+package com.aju.web.domain.notice;
 
 import java.util.List;
 
 import com.aju.web.domain.common.BaseEntity;
 import com.aju.web.domain.file.File;
-import com.aju.web.domain.image.Image;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,8 +36,6 @@ public class Notice extends BaseEntity {
 
     @OneToMany(mappedBy = "notice")
     private List<File> files;
-    @OneToMany(mappedBy = "notice")
-    private List<Image> images;
 
 
 
