@@ -2,15 +2,27 @@ package com.aju.web.domain.notice;
 
 import java.util.List;
 
+import org.aspectj.weaver.ast.Not;
+
 import com.aju.web.domain.common.BaseEntity;
 import com.aju.web.domain.file.File;
+import com.aju.web.domain.image.Image;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * packageName :  com.aju.web.domain.inquiry
@@ -25,18 +37,35 @@ import jakarta.persistence.OneToMany;
  */
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access= AccessLevel.PROTECTED)
 public class Notice extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notice_number", nullable = false)
     private Long noticeNumber;
 
+    @Column(length = 400)
     private String title;
+    @Lob
     private String content;
+
+    private boolean project;
+
+    @JoinColumn(name = "image_number")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Image thumbnail;
 
     @OneToMany(mappedBy = "notice")
     private List<File> files;
-
-
+    public void updateThumbnail(Image thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+    public void update(Notice updateNotice) {
+        this.title = updateNotice.getTitle();
+        this.content = updateNotice.getContent();
+    }
 
 }

@@ -11,6 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 /*
  * packageName :  com.aju.web.domain.file
  * fileName : File
@@ -24,14 +29,19 @@ import jakarta.persistence.ManyToOne;
  */
 
 @Entity
+@Getter
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class File extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_number", nullable = false)
     private Long fileNumber;
     private String originalFileName;
+    private String fileName;
     private Long fileSize;
-    private String fileUrl;
+    private String filePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notice_number")
