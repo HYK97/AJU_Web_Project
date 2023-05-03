@@ -1,4 +1,4 @@
-package com.aju.web.infra.repository;
+package com.aju.web.infra.repository.admin;
 
 import java.util.Optional;
 
