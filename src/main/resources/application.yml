@@ -1,0 +1,46 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  mvc:
+    static-path-pattern: /assets/**
+  datasource:
+    url: ${LOCAL_DB_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    database-platform: org.hibernate.dialect.MySQLDialect
+  web:
+    resources:
+      static-locations: classpath:/static/assets/
+      add-mappings: true
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${NAVER_ID}
+    mail-id: ${NAVER_EMAIL}
+    password: ${{NAVER_PASSWORD}}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+file:
+  image-path: C:/webfiles/image/
+  file-path: C:/webfiles/file/
+
+# 로그 레벨 설정
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
