@@ -47,12 +47,18 @@
 </div>
 <script>
     $("#submitBtn").click(function () {
+        var id = $('input[name="id"]').val();
+        var password = $('input[name="password"]').val();
+        if (id === "" || password === "") {
+            alert("아이디와 비밀번호를 모두 입력해주세요.");
+            return;
+        }
         $.ajax({
             type: "POST",
             url: "/admin/login",
             data: JSON.stringify({
-                "id": $('input[name="id"]').val(),
-                "password": $('input[name="password"]').val()
+                "id": id,
+                "password": password
             }),
             contentType: "application/json",
             dataType: "json",

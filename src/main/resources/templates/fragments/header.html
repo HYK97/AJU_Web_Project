@@ -2,9 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="headFragment">
 
-    <script src="https://code.jquery.com/jquery-3.6.4.js"
-            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-
 
     <header id="header" class="header d-flex align-items-center">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -30,10 +27,10 @@
                     </li>
                     <li><a href="/services">사업분야</a></li>
                     <li><a href="/projects">실적 및 사례</a></li>
-                    <li><a href="/announcement">공지사항</a></li>
+                    <li><a href="/notice">공지사항</a></li>
                     <li><a href="/contact">오시는길</a></li>
-                    <li th:if="${session.admin == null}"><a href="admin/login">로그인</a></li>
-                    <li th:if="${session.admin != null}"><a href="admin/logout">로그아웃</a></li>
+                    <li th:if="${session.admin == null}"><a href="/admin/login">로그인</a></li>
+                    <li th:if="${session.admin != null}"><a href="/admin/logout">로그아웃</a></li>
                 </ul>
             </nav><!-- .navbar -->
 
@@ -42,13 +39,15 @@
 
 
     <script>
-        $(document).ready(function () {
+        document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname;
-            $("nav.navbar ul li a").each(function () {
-                if (path === $(this).attr("href")) {
-                    $(this).addClass("active");
+            let navLinks = document.querySelectorAll("nav.navbar ul li a");
+
+            navLinks.forEach(function (link) {
+                if (path === link.getAttribute("href")) {
+                    link.classList.add("active");
                 } else {
-                    $(this).removeClass("active");
+                    link.classList.remove("active");
                 }
             });
         });
