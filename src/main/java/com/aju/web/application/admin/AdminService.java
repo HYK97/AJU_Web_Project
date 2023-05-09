@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.aju.web.domain.admin.Admin;
 import com.aju.web.infra.exception.ApplicationException;
 import com.aju.web.infra.exception.ErrorCode;
-import com.aju.web.infra.repository.AdminRepository;
+import com.aju.web.infra.repository.admin.AdminRepository;
 
 import lombok.RequiredArgsConstructor;
 
