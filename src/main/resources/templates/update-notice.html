@@ -68,7 +68,7 @@
                                    placeholder="공지사항 제목"
                                    value="" required>
                             <div class="invalid-feedback">
-                                공지사항 제목을 입력해주세요
+                                제목을 1자 이상 254자 이하로 작성해주세요.
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@
                             <label for="content" class="form-label">공지 사항</label>
                             <textarea class="summernote" th:text="${notice.content}" id="content" name="content" required></textarea>
                             <div class="invalid-feedback">
-                                공지사항을 작성해주세요
+                                내용을 1자 이상 작성해주세요.
                             </div>
                         </div>
 
@@ -111,6 +111,21 @@
                     event.stopPropagation();
                 }
                 form.classList.add('was-validated');
+                // 공지사항 제목 유효성 검사
+                const title = document.getElementById("title");
+                if (title.value.trim().length < 1 || title.value.trim().length > 254) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    title.setCustomValidity("valid")
+                }
+
+                // 공지사항 내용 유효성 검사
+                const content = document.getElementById("content");
+                if (content.value.trim().length < 1) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    content.setCustomValidity("valid")
+                }
             }, false);
         });
     }, false);
