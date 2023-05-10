@@ -49,7 +49,7 @@ public class Notice extends BaseEntity {
 
     @Column(length = 400)
     private String title;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private boolean project;

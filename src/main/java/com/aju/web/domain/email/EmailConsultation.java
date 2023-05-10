@@ -37,7 +37,7 @@ public class EmailConsultation extends BaseEntity {
     private Long consultationNumber;
     String email;
     String author;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     String content;
     String phone;
 }
