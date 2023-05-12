@@ -20,7 +20,9 @@ public enum ErrorCode {
     FILE_SAVE_ERROR("파일 저장 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
     FILE_SIZE_EXCEED("파일 사이즈가 초과되었습니다.", HttpStatus.BAD_REQUEST),
     FILE_EXTENSION_DENIED("파일 확장자가 허용되지 않습니다.", HttpStatus.BAD_REQUEST),
-    FILE_DELETE_ERROR("파일 삭제 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    FILE_DELETE_ERROR("파일 삭제 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    IMAGE_DELETE_ERROR("이미지 삭제 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    UNAUTHORIZED("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED );
     private final String description;
     private final HttpStatusCode httpStatusCode;
 }

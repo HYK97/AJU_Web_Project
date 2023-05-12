@@ -2,8 +2,11 @@ package com.aju.web.infra.exception;
 
 import static com.aju.web.infra.exception.ErrorCode.*;
 
+import java.util.Objects;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -23,6 +26,11 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<Object> applicationException(ApplicationException e) {
         return ResponseEntity.status(e.getErrorCode().getHttpStatusCode()).body(e.getErrorMessage());
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> applicationException(MethodArgumentNotValidException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            Objects.requireNonNull(e.getFieldError()).getField()+" : "+e.getFieldError().getDefaultMessage());
     }
 
     @ExceptionHandler(Exception.class)
