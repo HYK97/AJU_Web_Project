@@ -43,8 +43,10 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="my-2" th:if="${session.admin != null}" style="display: flex; justify-content: right;">
                 <a th:href="@{/notice/update/{id}(id=${notice.noticeNumber})}" class="btn btn-warning">수정</a>
+                <form th:action="@{/notice/{id}(id=${notice.noticeNumber})}" method="post">
+                    <button class="btn btn-danger" >삭제</button>
+                </form>
 
-                <button class="btn btn-danger" onclick="location.href='/update-notice/'">삭제</button>
             </div>
             <div class="row g-5">
 
