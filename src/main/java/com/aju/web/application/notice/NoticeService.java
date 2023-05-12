@@ -110,4 +110,48 @@ public class NoticeService {
         return updateNotice;
     }
 
+    @Transactional
+    public Notice update(ProjectRequest projectRequest, Long id) {
+        Notice notice = noticeRepository.findById(id)
+            .orElseThrow(() -> new ApplicationException(ErrorCode.NOTICE_NOT_FOUND));
+        Image updateThumbnail = null;
+
+        if (projectRequest.getThumbnail().getSize() > 0) {
+            imageService.deleteImage(notice.getThumbnail());
+            updateThumbnail = imageService.storeImage(projectRequest.getThumbnail());
+            notice.updateThumbnail(updateThumbnail);
+        }
+
+        Notice.NoticeBuilder builder = Notice.builder()
+            .title(projectRequest.getTitle())
+            .content(projectRequest.getContent())
+            .thumbnail(null)
+            .project(true);
+        if (updateThumbnail != null) {
+            builder.thumbnail(updateThumbnail);
+        }
+
+        notice.update(builder.build());
+
+        Notice updateNotice = noticeRepository.save(notice);
+
+        if (projectRequest.getFile().get(0).getSize() > 0) {
+            fileService.deleteFiles(updateNotice.getNoticeNumber());
+            fileService.FileStore(projectRequest.getFile(), updateNotice);
+        }
+        return updateNotice;
+    }
+
+    @Transactional
+    public void delete(Long id, BoardType type) {
+        Notice notice = noticeRepository.findById(id)
+            .orElseThrow(() -> new ApplicationException(ErrorCode.NOTICE_NOT_FOUND));
+
+        if (notice.getThumbnail() != null) {
+            imageService.deleteImage(notice.getThumbnail());
+        }
+        fileService.deleteFiles(notice.getNoticeNumber());
+
+        noticeRepository.delete(notice);
+    }
 }

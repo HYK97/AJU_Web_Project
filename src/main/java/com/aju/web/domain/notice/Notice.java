@@ -39,8 +39,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Builder
-@AllArgsConstructor(access= AccessLevel.PROTECTED)
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,12 +60,15 @@ public class Notice extends BaseEntity {
 
     @OneToMany(mappedBy = "notice")
     private List<File> files;
+
     public void updateThumbnail(Image thumbnail) {
         this.thumbnail = thumbnail;
     }
+
     public void update(Notice updateNotice) {
         this.title = updateNotice.getTitle();
         this.content = updateNotice.getContent();
+        this.thumbnail = updateNotice.getThumbnail() != null ? updateNotice.getThumbnail() : this.thumbnail;
     }
 
 }

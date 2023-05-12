@@ -4,6 +4,7 @@ import static com.aju.web.infra.utils.FileUtils.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,15 @@ public class ImageService {
 
     public Image loadImage(Long fileId) {
         return imageRepository.findById(fileId).orElseThrow(() -> new ApplicationException(ErrorCode.IMAGE_NOT_FOUND));
+    }
+
+    public void deleteImage(Image image) {
+        String imagePath = image.getImagePath();
+        imageRepository.delete(image);
+        try {
+            Files.delete(new File(imagePath).toPath());
+        } catch (IOException e) {
+            throw new ApplicationException(ErrorCode.IMAGE_DELETE_ERROR);
+        }
     }
 }
