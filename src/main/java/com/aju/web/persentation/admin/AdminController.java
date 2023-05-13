@@ -2,7 +2,6 @@ package com.aju.web.persentation.admin;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +39,7 @@ public class AdminController {
         session.setAttribute("admin", true);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/login")
     public String login(HttpSession session) {
         if (session.getAttribute("admin") != null) {
@@ -47,6 +47,7 @@ public class AdminController {
         }
         return "login";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
