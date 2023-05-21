@@ -14,9 +14,15 @@ import lombok.Setter;
 public class ApplicationException extends RuntimeException {
     private ErrorCode errorCode;
     private String errorMessage;
+    private Exception rootCase;
 
     public ApplicationException(ErrorCode errorCode) {
         this.errorCode = errorCode;
         this.errorMessage = errorCode.getDescription();
+    }
+    public ApplicationException(ErrorCode errorCode,Exception rootCase) {
+        this.errorCode = errorCode;
+        this.errorMessage = errorCode.getDescription();
+        this.rootCase = rootCase;
     }
 }

@@ -54,7 +54,7 @@ public class FileService {
         try {
             resource = new InputStreamResource(Files.newInputStream(filePath));
         } catch (IOException e) {
-            throw new ApplicationException(ErrorCode.FILE_SAVE_ERROR);
+            throw new ApplicationException(ErrorCode.FILE_SAVE_ERROR,e);
         }
         return FileDownloadResponse.of(resource, file.getOriginalFileName());
     }
@@ -82,7 +82,8 @@ public class FileService {
                 file.transferTo(new java.io.File(getPath(filename)));
                 fileNames.add(filename);
             } catch (IOException e) {
-                throw new ApplicationException(ErrorCode.IMAGE_SAVE_ERROR);
+
+                throw new ApplicationException(ErrorCode.IMAGE_SAVE_ERROR,e);
             }
 
         }

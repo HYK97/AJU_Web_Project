@@ -44,7 +44,7 @@ public class MailService {
 
         mailHelper.setFrom(authorEmail);
         mailHelper.setTo(emailConsultation.getEmail());
-        mailHelper.setSubject("예약이 완료되었습니다.");
+        mailHelper.setSubject("상담 예약이 완료되었습니다.");
         mailHelper.setText("빠른 시일내에 연락드리겠습니다.", true);
         mailSender.send(message);
 

@@ -63,7 +63,7 @@ public class ImageService {
             file.transferTo(new File(getPath(filename)));
             image = saveImage(file, filename);
         } catch (IOException e) {
-            throw new ApplicationException(ErrorCode.IMAGE_SAVE_ERROR);
+            throw new ApplicationException(ErrorCode.IMAGE_SAVE_ERROR,e);
         }
         return image;
     }
@@ -95,7 +95,7 @@ public class ImageService {
         try {
             Files.delete(new File(imagePath).toPath());
         } catch (IOException e) {
-            throw new ApplicationException(ErrorCode.IMAGE_DELETE_ERROR);
+            throw new ApplicationException(ErrorCode.IMAGE_DELETE_ERROR,e);
         }
     }
 }
