@@ -1,7 +1,12 @@
 package com.aju.web.persentation.main;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.aju.web.application.notice.NoticeService;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * packageName :  com.aju.web.persentation.main
@@ -15,10 +20,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 2023-04-26                ddh96             최초 생성
  */
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
+    private final NoticeService noticeService;
+
     @GetMapping({"/", "index"})
-    public String index() {
+    public String index(Model model) {
+
+        model.addAttribute("projectImage", noticeService.mainProjectImage());
+        model.addAttribute("recentNotice", noticeService.getRecentNotice());
         return "index";
     }
 

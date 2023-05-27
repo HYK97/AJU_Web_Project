@@ -1,5 +1,10 @@
 package com.aju.web.application.notice;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +23,8 @@ import com.aju.web.persentation.notice.BoardType;
 import com.aju.web.persentation.notice.NoticeRequest;
 import com.aju.web.persentation.notice.ProjectRequest;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -38,6 +45,7 @@ public class NoticeService {
 
     public final FileService fileService;
     public final ImageService imageService;
+    private static final Pattern pattern = Pattern.compile("/image/(\\d+)");
 
     public Notice getNotice(Long id, BoardType notice) {
         return noticeRepository.findByProjectAndNoticeNumber(id, notice.isProject())
@@ -153,5 +161,45 @@ public class NoticeService {
         fileService.deleteFiles(notice.getNoticeNumber());
 
         noticeRepository.delete(notice);
+    }
+
+    public List<SimpleProjectResponse> mainProjectImage() {
+        Page<Notice> findProject = noticeRepository.findByProjectIsTrue(PageRequest.of(0, 20, Sort.by("updatedTime").descending()));
+        return findProject.stream()
+            .map(i -> new SimpleProjectResponse(i.getNoticeNumber(), i.getThumbnail().getImageNumber())).toList();
+
+    }
+
+    private static void parseId(String paringData, List<Long> idList) {
+        Matcher matcher = pattern.matcher(paringData);
+
+        while (matcher.find()) {
+            idList.add(Long.parseLong(matcher.group(1)));
+        }
+    }
+
+    public List<SimpleNoticeResponse> getRecentNotice() {
+        List<Notice> findNotice = noticeRepository.findByProjectIsFalse(
+            PageRequest.of(0, 5, Sort.by("updatedTime").descending())).getContent();
+        return findNotice.stream()
+            .map(i -> new SimpleNoticeResponse(i.getNoticeNumber(), i.getTitle(), i.getCreatedTime()))
+            .toList();
+
+    }
+
+    @AllArgsConstructor
+    @Getter
+    static class SimpleProjectResponse {
+        private Long id;
+        private Long imageId;
+
+    }
+
+    @AllArgsConstructor
+    @Getter
+    static class SimpleNoticeResponse {
+        private Long id;
+        private String title;
+        private LocalDateTime createDate;
     }
 }

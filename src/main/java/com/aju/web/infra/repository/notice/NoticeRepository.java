@@ -1,5 +1,6 @@
 package com.aju.web.infra.repository.notice;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -28,5 +29,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
     Page<Notice> findByTitleContainsAndProject(String search, Pageable pageable, boolean project);
 
+    Page<Notice> findByProjectIsFalse(Pageable pageable);
+    Page<Notice> findByProjectIsTrue(Pageable pageable);
 
 }
