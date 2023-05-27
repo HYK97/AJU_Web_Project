@@ -67,5 +67,9 @@ public class MainController {
     public String createProjects() {
         return "create-project";
     }
+    @GetMapping("/counsel")
+    public String counsel() {
+        return "counsel";
+    }
 
 }
