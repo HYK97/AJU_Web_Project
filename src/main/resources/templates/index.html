@@ -30,10 +30,25 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
+
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;500&display=swap');
+        .h1-title{
+            font-family: 'Roboto Slab', serif;
+            font-weight: 500;
+            font-size: 35px;
+            line-height: 40px;
+            color: #4d4d4d;
+            padding-bottom: 15px;
+        }
         .border-box {
             box-sizing: border-box;
+            min-height: 240px;
+            padding: 25px 25px 0;
             border: 1px solid #d5d5d5;
+            position: relative;
+
         }
         .slider img {
             width: 20%; // 5개의 이미지를 한번에 보여주기 위해 이미지의 너비를 20%로 설정
@@ -52,6 +67,21 @@
 
             height: 263px;
         }
+        .main-h3{
+            font-size: 17px;
+            line-height: 18px;
+            color: #4d4d4d;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #d1d1d1;
+            font-weight: 900;
+        }
+        .button-img{
+            max-width: 178px;
+        }
+
+
+
 
 
     </style>
@@ -106,24 +136,33 @@
 
 <section>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12 border-box">
-                <h2>최신 공지사항 <button class="btn btn-primary rounded-circle">+</button></h2>
+        <div class="mx-2" ><h3 class="h1-title" style="text-align: center;">category</h3></div>
+        <div class="row" style="margin-top: 24px">
+            <div class="col-lg-4 col-sm-12 border-box" >
+                <h3 class="main-h3">최신 공지사항</h3>
                 <ul>
-                    <li th:each="notice : ${recentNotice}">
-                        <a th:href="@{'/notice/' + ${notice.id}}" th:text="${notice.title}">공지사항</a>
+                    <li th:each="notice : ${recentNotice}" style="  list-style: none;   position: relative;">
+                        <a style="margin-left: -25px;display: inline-block;max-width: 210px;font-size: 15px; font-weight: 200;line-height: 27px;color: #4d4d4d;vertical-align: top;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" th:href="@{'/notice/' + ${notice.id}}" th:text="${notice.title}">공지사항</a>
+                        <span  style="position: absolute;top: 0;right: 0;font-size: 15px;font-weight: 200;line-height: 30px;color: #4d4d4d;" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd')}"></span>
                     </li>
                 </ul>
+                <a style=" position: absolute;right: 25px; top: 19px; " href="/notice" class="more"><img style="width: 28px;" th:src="@{/assets/img/home/plus.png}" alt="더 보기"></a>
             </div>
             <div class="col-lg-1 col-sm-12">
             </div>
-            <div class="col-lg-7 col-sm-12 border-box">
-                <h2>바로가기 버튼</h2>
+            <div class="col-lg-7 col-sm-12 border-box" style="display: flex">
+
+                    <div><a href="/sub/sub06_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}" alt=""><p>견적의뢰</p></a></div>
+                    <div><a href="/sub/sub01_02.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>장비보유현황</p></a></div>
+                    <div><a href="/sub/sub04_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>철거공법</p></a></div>
+                    <div><a href="/sub/sub02_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>철거진행과정</p></a></div>
+
+               <!-- <h3 class="main-h3">바로가기 버튼</h3>
                 //견적 장비보유 실적및사례 오시는길
                 <button class="btn btn-primary rounded-circle">견적의뢰</button>
                 <button class="btn btn-primary rounded-circle">장비보유 현황</button>
                 <button class="btn btn-primary rounded-circle">연혁</button>
-                <button class="btn btn-primary rounded-circle">인사말</button>
+                <button class="btn btn-primary rounded-circle">인사말</button>-->
             </div>
         </div>
     </div>
@@ -137,7 +176,7 @@
 
             <div class="row justify-content-center gy-4">
 
-                <div class="mx-2" ><h3 style="text-align: center;">최근 시공 사진</h3></div>
+                <div class="mx-2" ><h3 class="h1-title" style="text-align: center;">construction photos</h3></div>
                 <!-- Carousel Wrapper -->
                 <div class="slider">
 
