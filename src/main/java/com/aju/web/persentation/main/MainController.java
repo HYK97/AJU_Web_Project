@@ -71,5 +71,9 @@ public class MainController {
     public String counsel() {
         return "counsel";
     }
+    @GetMapping("/equipment")
+    public String equipment() {
+        return "equipment";
+    }
 
 }
