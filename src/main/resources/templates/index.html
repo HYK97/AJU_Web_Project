@@ -29,6 +29,7 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 
     <style>
@@ -77,7 +78,8 @@
             font-weight: 900;
         }
         .button-img{
-            max-width: 178px;
+            font-size: 150px;
+            color : #4d4d4d;
         }
 
 
@@ -106,13 +108,13 @@
 
     <div class="info d-flex align-items-center">
         <div class="container">
-            <div class="row justify-content-center">
+   <!--         <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
                     <h2 data-aos="fade-down"><span>견적 의뢰</span></h2>
                     <p >연락주시면 친절히 상담해 드리겠습니다.</p>
                     <a data-aos="fade-up" data-aos-delay="200" href="/counsel" class="btn-get-started">견적 받으러 가기</a>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -138,7 +140,7 @@
     <div class="container">
         <div class="mx-2" ><h3 class="h1-title" style="text-align: center;">category</h3></div>
         <div class="row" style="margin-top: 24px">
-            <div class="col-lg-4 col-sm-12 border-box" >
+            <div class="col-lg-3 col-sm-12 border-box" >
                 <h3 class="main-h3">최신 공지사항</h3>
                 <ul>
                     <li th:each="notice : ${recentNotice}" style="  list-style: none;   position: relative;">
@@ -150,12 +152,16 @@
             </div>
             <div class="col-lg-1 col-sm-12">
             </div>
-            <div class="col-lg-7 col-sm-12 border-box" style="display: flex">
+            <div class="col-lg-8 col-sm-12 border-box" style="display: flex ;    justify-content: space-between;">
 
-                    <div><a href="/sub/sub06_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}" alt=""><p>견적의뢰</p></a></div>
-                    <div><a href="/sub/sub01_02.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>장비보유현황</p></a></div>
-                    <div><a href="/sub/sub04_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>철거공법</p></a></div>
-                    <div><a href="/sub/sub02_01.php"><img class="button-img" th:src="@{/assets/img/home/plus.png}"><p>철거진행과정</p></a></div>
+                    <div><a style="text-align: center;" href="/counsel"> <i class="button-img bi bi-envelope-at"></i><p style="color : black; font-weight: 900;">견적 받기</p></a></div>
+<!--                <i class="bi bi-envelope-at"></i>-->
+                    <div><a style="text-align: center;" href="/equipment"> <i class="button-img bi bi-truck"></i><p style="color : black; font-weight: 900;">보유 장비</p></a></div>
+          <!--      <i class="bi bi-truck"></i>-->
+                    <div><a style="text-align: center;" href="/projects"><i class="button-img bi bi-journal-check"></i><p style="color : black; font-weight: 900;">실적 및 사례</p></a></div>
+      <!--          <i class="bi bi-journal-check"></i>-->
+                    <div><a style="text-align: center;" href="/contact"><i class="button-img bi bi-browser-safari"></i><p style="color : black; font-weight: 900;">오시는길</p></a></div>
+                <!--<i class="bi bi-browser-safari"></i>-->
 
                <!-- <h3 class="main-h3">바로가기 버튼</h3>
                 //견적 장비보유 실적및사례 오시는길
@@ -193,7 +199,38 @@
 
 
 </main>
+<div class="float-form quickmenu" style="top: 1007.48px;">
+    <a href="javascript:void(0);" class="toggle">실시간 견적문의</a>
+    <ul class="quickmenu-inner" style="list-style: none;">
+        <li><a style="padding: 20px 0px 20px 33px;" href="#">아주환경개발(주)</a></li>
+        <li><a href="tel:041-355-7288">전화연결 <p>041-355-7288</p></a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".float-form .toggle").click(function(){
+            $(".float-form").toggleClass("active")
+        });
+        var wing = jQuery('.quickmenu');
+        if(jQuery('body').hasClass('main')){
+            var wing_top = 380;
+        }else{
+            var wing_top = 380;
+        }
+        wing.css('top', wing_top );
+        jQuery(window).scroll(function(){
+            wing.stop();
+            if (jQuery(window).scrollTop() > wing_top ) {
+                wing.animate( { "top": jQuery(document).scrollTop() + 200 + "px" }, 1882 );
+            } else {
+                wing.animate( { "top": wing_top + "px" }, 1882 );
+            };
+        });
+    });
 
+
+
+</script>
 <!-- ======= Footer ======= -->
 <th:block th:replace="~{fragments/footer :: footFragment}"></th:block>
 <!-- End Footer -->
