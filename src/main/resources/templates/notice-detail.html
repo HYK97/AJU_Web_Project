@@ -24,7 +24,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center"
          style="background-image: url('../assets/img/breadcrumbs-bg.jpg');">
-        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
 
             <h2 th:text="${notice.title}">제목</h2>
             <ol>
@@ -55,7 +55,7 @@
                     <article class="blog-details">
 
                         <div class="d-flex justify-content-between">
-                            <h2 class="title" th:text="${notice.title}">제목</h2>
+                            <h2 class="title" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" th:text="${notice.title}">제목</h2>
                             <div class="dropdown" th:if="${#lists.size(notice.filesURL) > 0}">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="attachmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     첨부파일 다운로드

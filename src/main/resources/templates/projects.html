@@ -10,6 +10,9 @@
     <meta content="" name="keywords">
 
     <th:block th:replace="~{fragments/importcss :: importCssFragment}"></th:block>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+    </style>
 </head>
 
 <body>
@@ -48,10 +51,10 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item" th:each="board, loop : ${paging}">
                         <a th:href="@{|/projects/${board.noticeNumber}|}">
-                            <div class="portfolio-content h-100">
-                                <img th:src="@{|image/${board.thumbnail.imageNumber}|}" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <p th:text="${board.title}">제목</p>
+                            <div class="<!--portfolio-content--> h-100">
+                                <div class="<!--portfolio-info-->" style="text-align: center">
+                                    <img th:src="@{|image/${board.thumbnail.imageNumber}|}" class="img-fluid" alt="">
+                                    <p th:text="${board.title}" style="overflow: hidden; white-space: nowrap;    text-overflow: ellipsis; font-family: 'Do Hyeon', sans-serif;">제목</p>
                                 </div>
                             </div>
                         </a>
