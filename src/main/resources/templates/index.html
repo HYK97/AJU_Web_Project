@@ -51,9 +51,7 @@
             position: relative;
 
         }
-        .slider img {
-            width: 20%; // 5개의 이미지를 한번에 보여주기 위해 이미지의 너비를 20%로 설정
-        }
+
         .bx-wrapper {
             box-shadow: none;
             border: none;
@@ -78,11 +76,20 @@
             font-weight: 900;
         }
         .button-img{
-            font-size: 150px;
+            font-size: 5rem; /* 이 값을 조절하여 원하는 크기로 설정합니다 */
+            max-width: 100%;
             color : #4d4d4d;
         }
-
-
+        .col-lg-8.border-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* 아이콘 내에서 수직으로 가운데로 정렬합니다 */
+        }
+        @media (min-width: 1400px) {
+            .button-img {
+                font-size: 140px;
+            }
+        }
 
 
 
@@ -185,10 +192,9 @@
                 <div class="mx-2" ><h3 class="h1-title" style="text-align: center;">construction photos</h3></div>
                 <!-- Carousel Wrapper -->
                 <div class="slider">
-
-
-                    <img class="images fill-slider" th:each="image : ${projectImage}" th:src="@{'/image/' + ${image.imageId}}" th:attr="data-id=${image.id}"/>
-
+                    <a th:each="image : ${projectImage}" th:href="@{'/projects/' + ${image.id}}">
+                        <img class="images fill-slider" th:src="@{'/image/' + ${image.imageId}}" />
+                    </a>
                 </div>
                 <!-- End of Carousel Wrapper -->
 
@@ -255,11 +261,9 @@
                 auto: true,
                 pause: 4000, // 1초마다 슬라이드
                 captions: true,
+                touchEnabled : (navigator.maxTouchPoints > 0)
             });
-            $(document).on('click', '.images', function() {
-                var id = $(this).data('id');
-                window.location.href = '/projects/' + id;
-            });
+
         }, 50);
 
 
