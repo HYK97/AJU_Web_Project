@@ -75,5 +75,9 @@ public class MainController {
     public String equipment() {
         return "equipment";
     }
+    @GetMapping("/license")
+    public String license() {
+        return "license";
+    }
 
 }
