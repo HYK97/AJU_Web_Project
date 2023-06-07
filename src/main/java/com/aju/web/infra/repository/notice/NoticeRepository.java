@@ -28,6 +28,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
     Optional<Notice> findByProjectAndNoticeNumber(Long noticeNumber,boolean isProject);
 
     Page<Notice> findByTitleContainsAndProject(String search, Pageable pageable, boolean project);
+    Page<Notice> findByTitleContainsAndProjectAndConstructionYear(String search, Pageable pageable, boolean project,String constructionYear);
 
     Page<Notice> findByProjectIsFalse(Pageable pageable);
     Page<Notice> findByProjectIsTrue(Pageable pageable);

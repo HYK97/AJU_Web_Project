@@ -18,6 +18,8 @@ public class ProjectRequest {
     @NotBlank(message = "이칸은 비워둘 수 없었습니다.")
     @Length(min = 1, message = "최소 1자이상 작성해주세요")
     private String content;
+    @NotBlank(message = "이칸은 비워둘 수 없었습니다.")
+    private String constructionYear;
     private List<MultipartFile> file;
     private MultipartFile thumbnail;
 }

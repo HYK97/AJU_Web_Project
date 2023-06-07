@@ -52,6 +52,8 @@ public class Notice extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    private String constructionYear;
+
     private boolean project;
 
     @JoinColumn(name = "image_number")
@@ -69,6 +71,7 @@ public class Notice extends BaseEntity {
         this.title = updateNotice.getTitle();
         this.content = updateNotice.getContent();
         this.thumbnail = updateNotice.getThumbnail() != null ? updateNotice.getThumbnail() : this.thumbnail;
+        this.constructionYear = updateNotice.getConstructionYear();
     }
 
 }

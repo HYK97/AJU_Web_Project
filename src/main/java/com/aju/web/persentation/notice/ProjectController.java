@@ -78,13 +78,13 @@ public class ProjectController {
 
     @GetMapping
     public String list(@RequestParam(defaultValue = "") String search, Model model,
-        @RequestParam(defaultValue = "0") int page) {
+        @RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "ALL") String year) {
 
-        Page<Notice> paging = noticeService.getList(search, page, BoardType.PROJECT);
+        Page<Notice> paging = noticeService.getList(search, page, BoardType.PROJECT,year);
 
         model.addAttribute("paging", paging);
         model.addAttribute("search", search);
-
+        model.addAttribute("year", year);
         return "projects";
     }
 

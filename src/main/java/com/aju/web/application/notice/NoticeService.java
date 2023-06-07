@@ -69,10 +69,13 @@ public class NoticeService {
     }
 
     @Transactional
-    public Page<Notice> getList(String search, int page, BoardType notice) {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by("updatedTime").descending());
+    public Page<Notice> getList(String search, int page, BoardType notice,String year) {
+        Pageable pageable = PageRequest.of(page, 9, Sort.by("updatedTime").descending());
         if (notice.isProject()) {
-            return noticeRepository.findByTitleContainsAndProject(search, pageable, true);
+            if (year.equals("ALL")) {
+                return noticeRepository.findByTitleContainsAndProject(search, pageable, true);
+            }
+            return noticeRepository.findByTitleContainsAndProjectAndConstructionYear(search, pageable, true,year);
         }
         return noticeRepository.findByTitleContainsAndProject(search, pageable, false);
     }
@@ -81,6 +84,7 @@ public class NoticeService {
         Notice createNotice = Notice.builder()
             .title(projectRequest.getTitle())
             .content(projectRequest.getContent())
+            .constructionYear(projectRequest.getConstructionYear())
             .project(true)
             .thumbnail(null)
             .build();
@@ -133,6 +137,7 @@ public class NoticeService {
         Notice.NoticeBuilder builder = Notice.builder()
             .title(projectRequest.getTitle())
             .content(projectRequest.getContent())
+            .constructionYear(projectRequest.getConstructionYear())
             .thumbnail(null)
             .project(true);
         if (updateThumbnail != null) {

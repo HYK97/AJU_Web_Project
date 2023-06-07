@@ -29,13 +29,14 @@ public class NoticeDetailResponse {
     private Long noticeNumber;
     private String title;
     private String content;
+    private String constructionYear;
 
     private LocalDateTime modifiedDate;
     private List<FileResponse> filesURL;
 
     public static NoticeDetailResponse from(Notice notice) {
         List<FileResponse> files = notice.getFiles().stream().map(FileResponse::from).toList();
-        return new NoticeDetailResponse(notice.getNoticeNumber(), notice.getTitle(), notice.getContent(),
+        return new NoticeDetailResponse(notice.getNoticeNumber(), notice.getTitle(), notice.getConstructionYear(), notice.getContent(),
             notice.getUpdatedTime(), files);
     }
 

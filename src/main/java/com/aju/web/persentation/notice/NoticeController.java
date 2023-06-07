@@ -79,7 +79,7 @@ public class NoticeController {
     @GetMapping
     public String list(@RequestParam(defaultValue = "") String search, Model model,
         @RequestParam(defaultValue = "0") int page) {
-        Page<Notice> paging = noticeService.getList(search, page, BoardType.NOTICE);
+        Page<Notice> paging = noticeService.getList(search, page, BoardType.NOTICE,null);
         model.addAttribute("paging", paging);
         model.addAttribute("search", search);
         return "notice";
