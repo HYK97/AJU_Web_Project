@@ -91,7 +91,7 @@
             <div class="col-sm-12">
               <label for="thumbnail" class="form-label">시공년도</label>
               <select class="form-select" aria-label="Default select example" name="constructionYear">
-                <option th:each="year : ${#numbers.sequence(2020, 2023)}"
+                <option th:each="year : ${#numbers.sequence(2023, 2020)}"
                         th:value="${year}"
                         th:selected="${year == notice.constructionYear}"
                         th:text="${year}">

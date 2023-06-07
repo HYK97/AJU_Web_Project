@@ -69,10 +69,10 @@ public class NoticeService {
     }
 
     @Transactional
-    public Page<Notice> getList(String search, int page, BoardType notice,String year) {
+    public Page<Notice> getList(String search, int page, BoardType notice,Integer year) {
         Pageable pageable = PageRequest.of(page, 9, Sort.by("updatedTime").descending());
         if (notice.isProject()) {
-            if (year.equals("ALL")) {
+            if (year==0) {
                 return noticeRepository.findByTitleContainsAndProject(search, pageable, true);
             }
             return noticeRepository.findByTitleContainsAndProjectAndConstructionYear(search, pageable, true,year);

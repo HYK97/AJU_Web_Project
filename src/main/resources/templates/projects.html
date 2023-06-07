@@ -23,7 +23,7 @@
             if (year != null) {
                 let classRemove = document.querySelector('.year-btn');
                 classRemove.classList.remove('filter-active');
-                let btn = document.querySelector('.year-btn[data-value="' + year + '"]');
+                let btn = document.querySelector('.btn[data-value="' + year + '"]');
                 btn.classList.add('filter-active');
             }
         });
@@ -62,18 +62,18 @@
                  data-portfolio-sort="original-order">
 
                 <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
-                    <li data-filter="*" class="filter-active year-btn" data-value="ALL">All</li>
-                    <li  class="year-btn"  data-filter=".year-2023" data-value="2023">2023</li>
-                    <li  class="year-btn"  data-filter=".year-2022" data-value="2022">2022</li>
-                    <li  class="year-btn"  data-filter=".year-2021" data-value="2021">2021</li>
-                    <li  class="year-btn"  data-filter=".year-2020" data-value="2020">2020</li>
+                    <li data-filter="*" class="filter-active year-btn" data-value="0">All</li>
+                    <li  class="year-btn"  data-filter=".2023" data-value="2023">2023</li>
+                    <li  class="year-btn"  data-filter=".2022" data-value="2022">2022</li>
+                    <li  class="year-btn"  data-filter=".2021" data-value="2021">2021</li>
+                    <li  class="year-btn"  data-filter=".2020" data-value="2020">2020</li>
                 </ul><!-- End Projects Filters -->
 
 
 
                 <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item year-2023" th:classappend="'year-'+${board.constructionYear}" th:each="board, loop : ${paging}">
+                    <div class="col-lg-4 col-md-6 portfolio-item" th:classappend="${board.constructionYear}" th:each="board, loop : ${paging}">
                         <a th:href="@{|/projects/${board.noticeNumber}|}">
                             <div class="<!--portfolio-content--> h-100">
                                 <div class="<!--portfolio-info-->" style="text-align: center">

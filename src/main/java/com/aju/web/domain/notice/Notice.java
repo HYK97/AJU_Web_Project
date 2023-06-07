@@ -52,7 +52,7 @@ public class Notice extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private String constructionYear;
+    private Integer constructionYear;
 
     private boolean project;
 

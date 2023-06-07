@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -18,8 +19,8 @@ public class ProjectRequest {
     @NotBlank(message = "이칸은 비워둘 수 없었습니다.")
     @Length(min = 1, message = "최소 1자이상 작성해주세요")
     private String content;
-    @NotBlank(message = "이칸은 비워둘 수 없었습니다.")
-    private String constructionYear;
+    @NotNull(message = "이칸은 비워둘 수 없었습니다.")
+    private Integer constructionYear;
     private List<MultipartFile> file;
     private MultipartFile thumbnail;
 }
