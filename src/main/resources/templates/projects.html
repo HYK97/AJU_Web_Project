@@ -8,11 +8,26 @@
     <title>아주환경개발 - 실적 및 사례</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <th:block th:replace="~{fragments/importcss :: importCssFragment}"></th:block>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
     </style>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.year-btn', function (e) {
+                let data = this.dataset.value;
+                location.href = "/projects?year=" + data;
+            });
+            let year = new URLSearchParams(location.search).get('year');
+            if (year != null) {
+                let classRemove = document.querySelector('.year-btn');
+                classRemove.classList.remove('filter-active');
+                let btn = document.querySelector('.year-btn[data-value="' + year + '"]');
+                btn.classList.add('filter-active');
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -46,10 +61,19 @@
             <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                  data-portfolio-sort="original-order">
 
+                <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="filter-active year-btn" data-value="ALL">All</li>
+                    <li  class="year-btn"  data-filter=".year-2023" data-value="2023">2023</li>
+                    <li  class="year-btn"  data-filter=".year-2022" data-value="2022">2022</li>
+                    <li  class="year-btn"  data-filter=".year-2021" data-value="2021">2021</li>
+                    <li  class="year-btn"  data-filter=".year-2020" data-value="2020">2020</li>
+                </ul><!-- End Projects Filters -->
+
+
 
                 <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item" th:each="board, loop : ${paging}">
+                    <div class="col-lg-4 col-md-6 portfolio-item year-2023" th:classappend="'year-'+${board.constructionYear}" th:each="board, loop : ${paging}">
                         <a th:href="@{|/projects/${board.noticeNumber}|}">
                             <div class="<!--portfolio-content--> h-100">
                                 <div class="<!--portfolio-info-->" style="text-align: center">
@@ -69,7 +93,7 @@
                 <ul class="pagination blog-pagination justify-content-center">
                     <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
                         <a class="page-link"
-                           th:href="@{|?page=${paging.number-1}${search != null ? '&search=' + search : ''}|}">
+                           th:href="@{|?page=${paging.number-1}${search != null ? '&search=' + search : ''}${year != null ? '&year=' + year : ''}|}">
                             <span>이전</span>
                         </a>
                     </li>
@@ -78,11 +102,11 @@
                         th:if="${page >= paging.number-5 and page <= paging.number+5}"
                         class="page-item">
                         <a th:text="${page + 1}"
-                           th:href="@{|?page=${page}${search != null ? '&search=' + search : ''}|}"></a>
+                           th:href="@{|?page=${page}${search != null ? '&search=' + search : ''}${year != null ? '&year=' + year : ''}|}"></a>
                     </li>
                     <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
                         <a class="page-link"
-                           th:href="@{|?page=${paging.number+1}${search != null ? '&search=' + search : ''}|}">
+                           th:href="@{|?page=${paging.number+1}${search != null ? '&search=' + search : ''}${year != null ? '&year=' + year : ''}|}">
                             <span>다음</span>
                         </a>
                     </li>

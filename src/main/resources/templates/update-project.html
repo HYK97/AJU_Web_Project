@@ -88,6 +88,18 @@
               >
             </div>
 
+            <div class="col-sm-12">
+              <label for="thumbnail" class="form-label">시공년도</label>
+              <select class="form-select" aria-label="Default select example" name="constructionYear">
+                <option th:each="year : ${#numbers.sequence(2020, 2023)}"
+                        th:value="${year}"
+                        th:selected="${year == notice.constructionYear}"
+                        th:text="${year}">
+                </option>
+              </select>
+            </div>
+
+
 
             <div class="col-12">
               <label for="content" class="form-label">실적 및 사례</label>
